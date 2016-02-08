@@ -1,5 +1,8 @@
 package com.scrumtrek.simplestore;
 
+/**
+ * Strategy use to calculate rental amount and points
+ */
 public abstract class RentalCalcStrategy {
 
     /**

@@ -1,5 +1,9 @@
 package com.scrumtrek.simplestore;
 
+/**
+ * Builds a plain text statement of customer all rentals
+ * @see com.scrumtrek.simplestore.RentalReporter
+ */
 public class SimpleRentalReporter implements RentalReporter {
 
     private static final String namePlaceholder = "\\{NAME\\}";
