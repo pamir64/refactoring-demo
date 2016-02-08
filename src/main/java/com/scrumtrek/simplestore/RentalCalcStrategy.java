@@ -1,7 +1,16 @@
 package com.scrumtrek.simplestore;
 
-public interface RentalCalcStrategy{
+public abstract class RentalCalcStrategy{
 
-    double calcRentalAmount(Customer customer);
-    int calcRentalPoints(Customer customer);
+    public abstract double calcRentalAmount(Customer customer);
+
+    public int calcRentalsPoints(Customer customer) {
+        int points = 0;
+        for(Rental rental: customer.getRentals()) {
+            points += 1 + rental.getMovie().getPriceCode().calcPoints(rental.getDaysRented());
+        }
+        return points;
+    }
+
+    public abstract int calcRentalPoints(Rental rental);
 }

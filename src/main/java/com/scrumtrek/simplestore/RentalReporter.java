@@ -11,7 +11,7 @@ public class RentalReporter {
 
     public String buildRentalsStatement(Customer customer, RentalCalcStrategy calcStrategy) {
         double amount = calcStrategy.calcRentalAmount(customer);
-        int points = calcStrategy.calcRentalPoints(customer);
+        int points = calcStrategy.calcRentalsPoints(customer);
         String statement = statementTemplate;
         statement = statement.replace(namePlaceholder, customer.getName());
         statement = statement.replace(amountPlaceholder, String.valueOf(amount));
