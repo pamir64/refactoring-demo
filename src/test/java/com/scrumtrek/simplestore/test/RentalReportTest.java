@@ -6,12 +6,12 @@ import org.junit.Test;
 
 public class RentalReportTest {
 
-    private RentalReporter reporter = new RentalReporter();
+    private SimpleRentalReporter reporter = new SimpleRentalReporter();
 
     @Test
     public void testCustomerNameInStatement() {
         Customer customer = new Customer("FooCustomer");
-        String statement = reporter.buildRentalsStatement(customer, new DefaultRentalCalcStrategy());
+        String statement = reporter.buildStatement(customer, new DefaultRentalCalcStrategy());
         Assert.assertNotNull(statement);
         Assert.assertTrue(statement.contains("Rental record for " + customer.getName()));
     }
@@ -41,7 +41,7 @@ public class RentalReportTest {
                 return 0;
             }
         };
-        String statement = reporter.buildRentalsStatement(new Customer("Foo"), calcStrategy);
+        String statement = reporter.buildStatement(new Customer("Foo"), calcStrategy);
         Assert.assertNotNull(statement);
         Assert.assertTrue(statement.contains(String.valueOf(testAmount)));
         Assert.assertTrue(statement.contains(String.valueOf(testPoints)));

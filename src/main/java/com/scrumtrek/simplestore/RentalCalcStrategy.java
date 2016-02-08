@@ -1,6 +1,6 @@
 package com.scrumtrek.simplestore;
 
-public abstract class RentalCalcStrategy{
+public abstract class RentalCalcStrategy {
 
     public double calcTotalAmount(Customer customer) {
         double amount = 0;
