@@ -1,7 +1,10 @@
 package com.scrumtrek.simplestore;
 
 public class Movie {
+	// где camelCase
+	// можно сделать final
 	private String m_Title;
+    // ФТ: почему нельзя 2 категории
 	private PriceCodes m_PriceCode;
 
 	public Movie(String title, PriceCodes priceCode) {

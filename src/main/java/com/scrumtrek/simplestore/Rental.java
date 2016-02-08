@@ -1,6 +1,8 @@
 package com.scrumtrek.simplestore;
 
 public class Rental {
+	// camelCase?
+    // final?
 	private Movie m_Movie;
 	private int m_DaysRented;
 

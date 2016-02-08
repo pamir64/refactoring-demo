@@ -20,6 +20,8 @@ public class Customer {
 		m_Rentals.add(arg);
 	}
 
+	// тут сразу вью, а можно вернуть model
+	// нужно вынести в другое место
 	public String Statement()
 	{
 		double totalAmount = 0;
