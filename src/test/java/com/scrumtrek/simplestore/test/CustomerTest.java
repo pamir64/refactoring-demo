@@ -11,6 +11,8 @@ import org.junit.Test;
 
 public class CustomerTest {
 
+    private static final String testCustomerName = "Customer1";
+
     private Movie movie1;
     private Movie movie2;
     private Movie movie3;
@@ -37,7 +39,7 @@ public class CustomerTest {
     }
 
     private void cleanRentals() {
-        customer = new Customer("Customer1");
+        customer = new Customer(testCustomerName);
     }
 
     private double getStatementTotalAmount(String statement) {
@@ -98,5 +100,12 @@ public class CustomerTest {
         rentalDaysTest(PriceCodes.Childrens, 3, 1.5);
         rentalDaysTest(PriceCodes.Childrens, 4, 1.5);
         rentalDaysTest(PriceCodes.Childrens, 5, 3);
+    }
+
+    @Test
+    public void testCustomerNameInStatement() {
+        String statement = customer.Statement();
+        Assert.assertNotNull(statement);
+        Assert.assertTrue(statement.contains("Rental record for " + testCustomerName));
     }
 }
