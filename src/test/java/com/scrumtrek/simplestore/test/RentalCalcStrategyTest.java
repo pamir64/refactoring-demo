@@ -116,5 +116,28 @@ public class RentalCalcStrategyTest {
         Assert.assertEquals(1, points);
     }
 
+    @Test
+    public void additiveAmountTest() {
+        double amount1 = calcStrategy.calcAmount(rental1);
+        double amount2 = calcStrategy.calcAmount(rental2);
+        double amount3 = calcStrategy.calcAmount(rental3);
+        double totalAmount = calcStrategy.calcTotalAmount(customer);
+        Assert.assertEquals(amount1 + amount2 + amount3, totalAmount, 0.0001);
+        Assert.assertTrue(totalAmount > 0);
+    }
 
+    @Test
+    public void additivePointsTest() {
+        int p1 = calcStrategy.calcPoints(rental1);
+        int p2 = calcStrategy.calcPoints(rental2);
+        int p3 = calcStrategy.calcPoints(rental3);
+        double totalPoints = calcStrategy.calcTotalPoints(customer);
+        Assert.assertEquals(p1 + p2 + p3, totalPoints, 0.0001);
+        Assert.assertTrue(totalPoints > 0);
+    }
+
+    @Test
+    public void positiveRentalPointsTest() {
+        Assert.assertTrue(calcStrategy.calcPoints(rental1) > 0);
+    }
 }
