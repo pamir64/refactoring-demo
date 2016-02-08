@@ -15,8 +15,8 @@ public class SimpleRentalReporter implements RentalReporter {
 
     @Override
     public String buildStatement(Customer customer, RentalCalcStrategy calcStrategy) {
-        double amount = calcStrategy.calcTotalAmount(customer);
-        int points = calcStrategy.calcTotalPoints(customer);
+        double amount = calcStrategy.calcTotalAmount(customer.getRentals());
+        int points = calcStrategy.calcTotalPoints(customer.getRentals());
         String statement = statementTemplate;
         statement = statement.replace(namePlaceholder, customer.getName());
         statement = statement.replace(amountPlaceholder, String.valueOf(amount));

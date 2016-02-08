@@ -43,30 +43,30 @@ public class RentalCalcStrategyTest {
     @Test
     public void zeroAmountTest() {
         cleanRentals();
-        double amount = calcStrategy.calcTotalAmount(customer);
+        double amount = calcStrategy.calcTotalAmount(customer.getRentals());
         Assert.assertEquals(0, amount, 0.0001);
     }
 
     @Test
     public void totalAmountTest() {
-        double amount = calcStrategy.calcTotalAmount(customer);
+        double amount = calcStrategy.calcTotalAmount(customer.getRentals());
         Assert.assertEquals(11, amount, 0.0001);
     }
 
     @Test
     public void priceCodeChangeTest() {
-        final double amount1 = calcStrategy.calcTotalAmount(customer);
+        final double amount1 = calcStrategy.calcTotalAmount(customer.getRentals());
         movie1.setPriceCode(PriceCodes.Childrens);
-        final double amount2 = calcStrategy.calcTotalAmount(customer);
+        final double amount2 = calcStrategy.calcTotalAmount(customer.getRentals());
         Assert.assertNotEquals(amount1, amount2);
     }
 
     private void rentalDaysTest(PriceCodes priceCode, int days, double expectedAmount) {
-        final double amount1 = calcStrategy.calcTotalAmount(customer);
+        final double amount1 = calcStrategy.calcTotalAmount(customer.getRentals());
         Movie movie = new Movie("extra Movie", priceCode);
         Rental extraRental = new Rental(movie, days);
         customer.addRental(extraRental);
-        final double amount2 = calcStrategy.calcTotalAmount(customer);
+        final double amount2 = calcStrategy.calcTotalAmount(customer.getRentals());
         Assert.assertEquals(expectedAmount, amount2 - amount1, 0.0001);
     }
 
@@ -121,7 +121,7 @@ public class RentalCalcStrategyTest {
         double amount1 = calcStrategy.calcAmount(rental1);
         double amount2 = calcStrategy.calcAmount(rental2);
         double amount3 = calcStrategy.calcAmount(rental3);
-        double totalAmount = calcStrategy.calcTotalAmount(customer);
+        double totalAmount = calcStrategy.calcTotalAmount(customer.getRentals());
         Assert.assertEquals(amount1 + amount2 + amount3, totalAmount, 0.0001);
         Assert.assertTrue(totalAmount > 0);
     }
@@ -131,7 +131,7 @@ public class RentalCalcStrategyTest {
         int p1 = calcStrategy.calcPoints(rental1);
         int p2 = calcStrategy.calcPoints(rental2);
         int p3 = calcStrategy.calcPoints(rental3);
-        double totalPoints = calcStrategy.calcTotalPoints(customer);
+        double totalPoints = calcStrategy.calcTotalPoints(customer.getRentals());
         Assert.assertEquals(p1 + p2 + p3, totalPoints, 0.0001);
         Assert.assertTrue(totalPoints > 0);
     }

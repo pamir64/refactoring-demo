@@ -1,5 +1,7 @@
 package com.scrumtrek.simplestore;
 
+import java.util.Collection;
+
 /**
  * Strategy use to calculate rental amount and points
  */
@@ -8,9 +10,9 @@ public abstract class RentalCalcStrategy {
     /**
      * calculates total amount for customer all rentals
      */
-    public double calcTotalAmount(Customer customer) {
+    public double calcTotalAmount(Collection<Rental> rentals) {
         double amount = 0;
-        for(Rental rental: customer.getRentals()) {
+        for(Rental rental: rentals) {
             amount += calcAmount(rental);
         }
         return amount;
@@ -19,9 +21,9 @@ public abstract class RentalCalcStrategy {
     /**
      * calculates total bonus points for customer all rentals
      */
-    public int calcTotalPoints(Customer customer) {
+    public int calcTotalPoints(Collection<Rental> rentals) {
         int points = 0;
-        for(Rental rental: customer.getRentals()) {
+        for(Rental rental: rentals) {
             points += calcPoints(rental);
         }
         return points;

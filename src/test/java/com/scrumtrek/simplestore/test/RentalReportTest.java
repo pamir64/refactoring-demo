@@ -4,6 +4,8 @@ import com.scrumtrek.simplestore.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collection;
+
 public class RentalReportTest {
 
     private SimpleRentalReporter reporter = new SimpleRentalReporter();
@@ -22,12 +24,12 @@ public class RentalReportTest {
         final int testPoints = (int) (Math.random() * Integer.MAX_VALUE);
         RentalCalcStrategy calcStrategy = new RentalCalcStrategy() {
             @Override
-            public double calcTotalAmount(Customer customer) {
+            public double calcTotalAmount(Collection<Rental> rentals) {
                 return testAmount;
             }
 
             @Override
-            public int calcTotalPoints(Customer customer) {
+            public int calcTotalPoints(Collection<Rental> rentals) {
                 return testPoints;
             }
 
