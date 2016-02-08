@@ -82,4 +82,37 @@ public class RentalCalcStrategyTest {
         rentalDaysTest(PriceCodes.Childrens, 4, 1.5);
         rentalDaysTest(PriceCodes.Childrens, 5, 3);
     }
+
+    @Test
+    public void regularPointsTest() {
+        Rental rental = new Rental(movie1, 1);
+        int points = calcStrategy.calcRentalPoints(rental);
+        Assert.assertEquals(0, points);
+
+        rental = new Rental(movie1, 3);
+        points = calcStrategy.calcRentalPoints(rental);
+        Assert.assertEquals(0, points);
+    }
+
+    @Test
+    public void newReleasePointsTest() {
+        Rental rental = new Rental(movie2, 1);
+        int points = calcStrategy.calcRentalPoints(rental);
+        Assert.assertEquals(0, points);
+
+        rental = new Rental(movie2, 3);
+        points = calcStrategy.calcRentalPoints(rental);
+        Assert.assertEquals(1, points);
+    }
+
+    @Test
+    public void childrenPointsTest() {
+        Rental rental = new Rental(movie3, 1);
+        int points = calcStrategy.calcRentalPoints(rental);
+        Assert.assertEquals(0, points);
+
+        rental = new Rental(movie3, 3);
+        points = calcStrategy.calcRentalPoints(rental);
+        Assert.assertEquals(0, points);
+    }
 }
