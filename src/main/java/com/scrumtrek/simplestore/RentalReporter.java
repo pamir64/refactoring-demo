@@ -10,8 +10,8 @@ public class RentalReporter {
             "\nYou earned " + pointPlaceholder + " frequent renter points.";
 
     public String buildRentalsStatement(Customer customer, RentalCalcStrategy calcStrategy) {
-        double amount = calcStrategy.calcRentalAmount(customer);
-        int points = calcStrategy.calcRentalsPoints(customer);
+        double amount = calcStrategy.calcTotalAmount(customer);
+        int points = calcStrategy.calcTotalPoints(customer);
         String statement = statementTemplate;
         statement = statement.replace(namePlaceholder, customer.getName());
         statement = statement.replace(amountPlaceholder, String.valueOf(amount));

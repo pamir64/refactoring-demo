@@ -22,17 +22,22 @@ public class RentalReportTest {
         final int testPoints = (int) (Math.random() * Integer.MAX_VALUE);
         RentalCalcStrategy calcStrategy = new RentalCalcStrategy() {
             @Override
-            public double calcRentalAmount(Customer customer) {
+            public double calcTotalAmount(Customer customer) {
                 return testAmount;
             }
 
             @Override
-            public int calcRentalsPoints(Customer customer) {
+            public int calcTotalPoints(Customer customer) {
                 return testPoints;
             }
 
             @Override
-            public int calcRentalPoints(Rental rental) {
+            public double calcAmount(Rental rental) {
+                return 0;
+            }
+
+            @Override
+            public int calcPoints(Rental rental) {
                 return 0;
             }
         };

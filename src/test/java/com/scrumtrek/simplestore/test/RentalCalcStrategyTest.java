@@ -43,30 +43,30 @@ public class RentalCalcStrategyTest {
     @Test
     public void zeroAmountTest() {
         cleanRentals();
-        double amount = calcStrategy.calcRentalAmount(customer);
+        double amount = calcStrategy.calcTotalAmount(customer);
         Assert.assertEquals(0, amount, 0.0001);
     }
 
     @Test
-    public void statementTest() {
-        double amount = calcStrategy.calcRentalAmount(customer);
+    public void totalAmountTest() {
+        double amount = calcStrategy.calcTotalAmount(customer);
         Assert.assertEquals(11, amount, 0.0001);
     }
 
     @Test
     public void priceCodeChangeTest() {
-        final double amount1 = calcStrategy.calcRentalAmount(customer);
+        final double amount1 = calcStrategy.calcTotalAmount(customer);
         movie1.setPriceCode(PriceCodes.Childrens);
-        final double amount2 = calcStrategy.calcRentalAmount(customer);
+        final double amount2 = calcStrategy.calcTotalAmount(customer);
         Assert.assertNotEquals(amount1, amount2);
     }
 
     private void rentalDaysTest(PriceCodes priceCode, int days, double expectedAmount) {
-        final double amount1 = calcStrategy.calcRentalAmount(customer);
+        final double amount1 = calcStrategy.calcTotalAmount(customer);
         Movie movie = new Movie("extra Movie", priceCode);
         Rental extraRental = new Rental(movie, days);
         customer.addRental(extraRental);
-        final double amount2 = calcStrategy.calcRentalAmount(customer);
+        final double amount2 = calcStrategy.calcTotalAmount(customer);
         Assert.assertEquals(expectedAmount, amount2 - amount1, 0.0001);
     }
 
@@ -86,33 +86,35 @@ public class RentalCalcStrategyTest {
     @Test
     public void regularPointsTest() {
         Rental rental = new Rental(movie1, 1);
-        int points = calcStrategy.calcRentalPoints(rental);
-        Assert.assertEquals(0, points);
+        int points = calcStrategy.calcPoints(rental);
+        Assert.assertEquals(1, points);
 
         rental = new Rental(movie1, 3);
-        points = calcStrategy.calcRentalPoints(rental);
-        Assert.assertEquals(0, points);
+        points = calcStrategy.calcPoints(rental);
+        Assert.assertEquals(1, points);
     }
 
     @Test
     public void newReleasePointsTest() {
         Rental rental = new Rental(movie2, 1);
-        int points = calcStrategy.calcRentalPoints(rental);
-        Assert.assertEquals(0, points);
+        int points = calcStrategy.calcPoints(rental);
+        Assert.assertEquals(1, points);
 
         rental = new Rental(movie2, 3);
-        points = calcStrategy.calcRentalPoints(rental);
-        Assert.assertEquals(1, points);
+        points = calcStrategy.calcPoints(rental);
+        Assert.assertEquals(2, points);
     }
 
     @Test
     public void childrenPointsTest() {
         Rental rental = new Rental(movie3, 1);
-        int points = calcStrategy.calcRentalPoints(rental);
-        Assert.assertEquals(0, points);
+        int points = calcStrategy.calcPoints(rental);
+        Assert.assertEquals(1, points);
 
         rental = new Rental(movie3, 3);
-        points = calcStrategy.calcRentalPoints(rental);
-        Assert.assertEquals(0, points);
+        points = calcStrategy.calcPoints(rental);
+        Assert.assertEquals(1, points);
     }
+
+
 }
