@@ -48,4 +48,18 @@ public class RentalReportTest {
         Assert.assertTrue(statement.contains(String.valueOf(testAmount)));
         Assert.assertTrue(statement.contains(String.valueOf(testPoints)));
     }
+
+    @Test
+    public void testSimpleReportTest() {
+        Customer customer = new Customer("Foobar");
+        customer.addRental(new Rental(new Movie("Cinderella", PriceCodes.Childrens), 5));
+        customer.addRental(new Rental(new Movie("Gladiator", PriceCodes.NewRelease), 5));
+        String statement = new SimpleRentalReporter().buildStatement(customer, new DefaultRentalCalcStrategy());
+        System.out.println(statement);
+        Assert.assertEquals("Rental record for Foobar\n" +
+                "\tCinderella\t3.0\n" +
+                "\tGladiator\t15.0\n" +
+                "Amount owed is 18.0\n" +
+                "You earned 3 frequent renter points.", statement);
+    }
 }

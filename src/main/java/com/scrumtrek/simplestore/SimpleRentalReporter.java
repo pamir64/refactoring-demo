@@ -6,21 +6,20 @@ package com.scrumtrek.simplestore;
  */
 public class SimpleRentalReporter implements RentalReporter {
 
-    private static final String namePlaceholder = "\\{NAME\\}";
-    private static final String amountPlaceholder = "\\{AMOUNT\\}";
-    private static final String pointPlaceholder = "\\{POINTS\\}";
-    private static final String statementTemplate = "Rental record for " + namePlaceholder + "\n" +
-            "Amount owed is " + amountPlaceholder +
-            "\nYou earned " + pointPlaceholder + " frequent renter points.";
-
     @Override
     public String buildStatement(Customer customer, RentalCalcStrategy calcStrategy) {
         double amount = calcStrategy.calcTotalAmount(customer.getRentals());
         int points = calcStrategy.calcTotalPoints(customer.getRentals());
-        String statement = statementTemplate;
-        statement = statement.replace(namePlaceholder, customer.getName());
-        statement = statement.replace(amountPlaceholder, String.valueOf(amount));
-        statement = statement.replace(pointPlaceholder, String.valueOf(points));
-        return statement;
+        StringBuilder stmt = new StringBuilder()
+                .append("Rental record for ").append(customer.getName()).append("\n");
+
+        for(Rental rental: customer.getRentals()) {
+            stmt.append("\t").append(rental.getMovie().getTitle())
+                    .append("\t").append(rental.getMovie().getPriceCode().calcAmount(rental.getDaysRented())).append("\n");
+        }
+
+        stmt = stmt.append("Amount owed is ").append(amount).append("\n");
+        stmt = stmt.append("You earned ").append(points).append(" frequent renter points.");
+        return stmt.toString();
     }
 }
