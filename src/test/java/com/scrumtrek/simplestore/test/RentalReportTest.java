@@ -20,8 +20,8 @@ public class RentalReportTest {
 
     @Test
     public void testStatementAmount() {
-        final double testAmount = Math.random() * Double.MAX_VALUE;
-        final int testPoints = (int) (Math.random() * Integer.MAX_VALUE);
+        final double testAmount = 123456789.876543210;
+        final int testPoints = 1234567890;
         RentalCalcStrategy calcStrategy = new RentalCalcStrategy() {
             @Override
             public double calcTotalAmount(Collection<Rental> rentals) {
